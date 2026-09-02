@@ -279,7 +279,7 @@ html, body {
 
     /* Ajuste de tipografías para que sean muy cómodas de leer en el celular */
     .cover-title { font-size: 10vw; }
-    .heart-title { font-size: 5.5vw !important; }
+    .heart-title { font-size: 5vw !important; }
     .instruction { font-size: 3.5vw; }
     .letter-content { font-size: 4.5vw; }
     .question { font-size: 8vw; }
