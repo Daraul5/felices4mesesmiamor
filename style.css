@@ -247,6 +247,14 @@ html, body {
     letter-spacing: 1px;
 }
 
+/* Clases específicas para el corazón de la portada y mensaje final */
+.heart-title {
+    font-size: min(2vw, 3vh);
+}
+.final-message {
+    font-size: min(3vw, 4vh);
+}
+
 /* ========================================= */
 /* OPTIMIZACIÓN EXTREMA PARA MÓVILES (EPUB)  */
 /* ========================================= */
@@ -271,9 +279,11 @@ html, body {
 
     /* Ajuste de tipografías para que sean muy cómodas de leer en el celular */
     .cover-title { font-size: 10vw; }
+    .heart-title { font-size: 5.5vw !important; }
     .instruction { font-size: 3.5vw; }
     .letter-content { font-size: 4.5vw; }
     .question { font-size: 8vw; }
+    .final-message { font-size: 6.5vw !important; }
     .heart-icon { font-size: 12vw; }
     .page-footer-nav { font-size: 2.5vw; }
     .epub-message { font-size: 3.5vw; margin-top: 25px; }

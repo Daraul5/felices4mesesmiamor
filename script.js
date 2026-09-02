@@ -115,7 +115,7 @@ function construirLibro() {
                             <svg viewBox="0 0 100 90" style="width: 100%; height: auto; stroke: var(--gold); fill: transparent; stroke-width: 1.5; filter: drop-shadow(0 0 5px rgba(173, 140, 59, 0.5)); overflow: visible;">
                                 <path d="M50 85 C 20 55, 0 35, 15 15 C 25 2, 45 5, 50 20 C 55 5, 75 2, 85 15 C 100 35, 80 55, 50 85 Z"/>
                             </svg>
-                            <h1 class="cover-title" style="position: absolute; text-align: center; font-size: min(2vw, 3vh); line-height: 1.3; width: 100%; margin: 0; top: 20%;">Felices<br>4 meses<br>mi amor</h1>
+                            <h1 class="cover-title heart-title" style="position: absolute; text-align: center; line-height: 1.3; width: 100%; margin: 0; top: 20%;">Felices<br>4 meses<br>mi amor</h1>
                         </div>
                         <p class="instruction">Toca la derecha para avanzar &rarr;</p>
                         <p class="instruction" style="font-size: 0.8em; opacity: 0.7; margin-top: 5px;">&larr; Toca la izquierda para retroceder</p>
@@ -151,7 +151,7 @@ function construirLibro() {
     leavesData.push({
         front: `<div class="front paper-page">
                     <div class="content flex-center">
-                        <h2 class="question" style="font-size: min(3vw, 4vh);">Mi tiempo contigo es lo que ilumina mi alma, mi amor</h2>
+                        <h2 class="question final-message">Mi tiempo contigo es lo que ilumina mi alma, mi amor</h2>
                         <div class="victorian-ornament">
                             <svg width="80" height="40" viewBox="0 0 100 50" fill="currentColor">
                                 <path d="M50 45 C 20 45, 5 25, 20 10 C 30 0, 45 10, 50 20 C 55 10, 70 0, 80 10 C 95 25, 80 45, 50 45 Z" fill="none" stroke="currentColor" stroke-width="2"/>
