@@ -107,15 +107,18 @@ function construirLibro() {
     const leavesData = [];
     const isMobile = window.innerWidth <= 768; 
 
-    // Hoja 0: Portada con el corazón y texto
+    // Hoja 0: Portada con el corazón y texto (proporciones adaptadas a cada dispositivo)
+    const heartWidth = isMobile ? '55%' : '65%';
+    const titleFontSize = isMobile ? '5.5vw' : 'min(2vw, 3vh)';
+
     leavesData.push({
         front: `<div class="front cover-page">
                     <div class="cover-design">
-                        <div style="position: relative; width: 65%; display: flex; justify-content: center; align-items: center; margin-bottom: 30px;">
+                        <div style="position: relative; width: ${heartWidth}; display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
                             <svg viewBox="0 0 100 90" style="width: 100%; height: auto; stroke: var(--gold); fill: transparent; stroke-width: 1.5; filter: drop-shadow(0 0 5px rgba(173, 140, 59, 0.5)); overflow: visible;">
                                 <path d="M50 85 C 20 55, 0 35, 15 15 C 25 2, 45 5, 50 20 C 55 5, 75 2, 85 15 C 100 35, 80 55, 50 85 Z"/>
                             </svg>
-                            <h1 class="cover-title heart-title" style="position: absolute; text-align: center; line-height: 1.2; width: 65%; margin: 0; top: 22%;">Felices<br>4 meses<br>mi amor</h1>
+                            <h1 style="position: absolute; text-align: center; line-height: 1.15; width: 60%; margin: 0; top: 18%; font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); text-shadow: 2px 2px 4px rgba(0,0,0,0.4); font-size: ${titleFontSize};">Felices<br>4 meses<br>mi amor</h1>
                         </div>
                         <p class="instruction">Toca la derecha para avanzar &rarr;</p>
                         <p class="instruction" style="font-size: 0.8em; opacity: 0.7; margin-top: 5px;">&larr; Toca la izquierda para retroceder</p>
