@@ -13,10 +13,10 @@ window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
         const book = document.getElementById('book');
-        book.innerHTML = ''; 
+        book.innerHTML = '';
         book.className = 'book state-closed-front'; // Reiniciar estado
         construirLibro(); // Volver a calcular
-    }, 400); 
+    }, 400);
 });
 
 function generarParticulas() {
@@ -37,24 +37,24 @@ function generarParticulas() {
 function construirLibro() {
     const book = document.getElementById('book');
     const sourceText = document.getElementById('source-text').textContent;
-    
+
     const paragraphs = sourceText.split(/\n\s*\n/).filter(p => p.trim() !== '');
 
     const measureBox = document.createElement('div');
     measureBox.className = 'content letter-content';
     measureBox.style.position = 'absolute';
     measureBox.style.visibility = 'hidden';
-    measureBox.style.width = '100%'; 
+    measureBox.style.width = '100%';
     measureBox.style.height = '100%';
     book.appendChild(measureBox);
 
     const pageContents = [];
     let isFirstParagraph = true;
-    
+
     for (const text of paragraphs) {
         const words = text.trim().split(/\s+/);
         let currentP = document.createElement('p');
-        
+
         if (isFirstParagraph) {
             currentP.className = 'first-paragraph';
             isFirstParagraph = false;
@@ -67,30 +67,30 @@ function construirLibro() {
         if (text.includes("David Raul")) {
             currentP.classList.add("signature-paragraph", "signature-name");
         }
-        
+
         measureBox.appendChild(currentP);
 
         for (const word of words) {
             const oldText = currentP.textContent;
             currentP.textContent = oldText ? oldText + ' ' + word : word;
-            
+
             const boxRect = measureBox.getBoundingClientRect();
             const style = window.getComputedStyle(measureBox);
             const paddingBottom = parseFloat(style.paddingBottom);
-            
+
             // Aumentamos el margen de seguridad a 25px para evitar cortes verticales abruptos
-            const maxBottom = boxRect.bottom - paddingBottom - 25; 
-            
+            const maxBottom = boxRect.bottom - paddingBottom - 25;
+
             const pRect = currentP.getBoundingClientRect();
-            
+
             if (pRect.bottom > maxBottom) {
-                currentP.textContent = oldText; 
-                pageContents.push(measureBox.innerHTML); 
-                
-                measureBox.innerHTML = ''; 
+                currentP.textContent = oldText;
+                pageContents.push(measureBox.innerHTML);
+
+                measureBox.innerHTML = '';
                 currentP = document.createElement('p');
                 currentP.className = 'continued';
-                
+
                 if (text.includes("Por siempre tuyo")) currentP.classList.add("signature-paragraph");
                 if (text.includes("David Raul")) currentP.classList.add("signature-paragraph", "signature-name");
 
@@ -105,7 +105,7 @@ function construirLibro() {
     book.removeChild(measureBox);
 
     const leavesData = [];
-    const isMobile = window.innerWidth <= 768; 
+    const isMobile = window.innerWidth <= 768;
 
     // Hoja 0: Portada con el corazón y texto (proporciones adaptadas a cada dispositivo)
     const heartWidth = isMobile ? '55%' : '65%';
@@ -118,7 +118,7 @@ function construirLibro() {
                             <svg viewBox="0 0 100 90" style="width: 100%; height: auto; stroke: var(--gold); fill: transparent; stroke-width: 1.5; filter: drop-shadow(0 0 5px rgba(173, 140, 59, 0.5)); overflow: visible;">
                                 <path d="M50 85 C 20 55, 0 35, 15 15 C 25 2, 45 5, 50 20 C 55 5, 75 2, 85 15 C 100 35, 80 55, 50 85 Z"/>
                             </svg>
-                            <h1 style="position: absolute; text-align: center; line-height: 1.15; width: 60%; margin: 0; top: 18%; font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); text-shadow: 2px 2px 4px rgba(0,0,0,0.4); font-size: ${titleFontSize};">Felices<br>4 meses<br>mi amor</h1>
+                            <h1 style="position: absolute; text-align: center; line-height: 1.15; width: 60%; margin: 0; top: 18%; font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); text-shadow: 2px 2px 4px rgba(0,0,0,0.4); font-size: ${titleFontSize};">Felices<br>4 meses<br>amor</h1>
                         </div>
                         <p class="instruction">Toca la derecha para avanzar &rarr;</p>
                         <p class="instruction" style="font-size: 0.8em; opacity: 0.7; margin-top: 5px;">&larr; Toca la izquierda para retroceder</p>
@@ -138,10 +138,10 @@ function construirLibro() {
         }
     } else {
         let i = 0;
-        while(i < pageContents.length) {
+        while (i < pageContents.length) {
             let frontContent = pageContents[i];
-            let backContent = pageContents[i+1] || ''; 
-            
+            let backContent = pageContents[i + 1] || '';
+
             leavesData.push({
                 front: `<div class="front paper-page"><div class="content letter-content">${frontContent}</div></div>`,
                 back: `<div class="back paper-page"><div class="content letter-content">${backContent}</div>${navInstruction}</div>`
@@ -180,11 +180,11 @@ function construirLibro() {
     leavesData.forEach((leafData, index) => {
         const leafElement = document.createElement('div');
         leafElement.className = 'page';
-        
+
         const baseZ = leavesData.length - index;
         leafElement.dataset.baseZ = baseZ;
         leafElement.style.zIndex = baseZ;
-        
+
         leafElement.innerHTML = leafData.front + leafData.back;
         book.appendChild(leafElement);
         leaves.push(leafElement);
@@ -195,10 +195,10 @@ function construirLibro() {
             const leaf = leaves[activeLeafIndex];
             leaf.classList.add('flipped');
             leaf.style.zIndex = currentZIndex++;
-            
+
             if (activeLeafIndex === 0) book.classList.replace('state-closed-front', 'state-open');
             if (activeLeafIndex === leaves.length - 1) book.classList.replace('state-open', 'state-closed-back');
-            
+
             activeLeafIndex++;
         }
     }
@@ -209,7 +209,7 @@ function construirLibro() {
             const leaf = leaves[activeLeafIndex];
             leaf.classList.remove('flipped');
             leaf.style.zIndex = leaf.dataset.baseZ;
-            
+
             if (activeLeafIndex === 0) book.classList.replace('state-open', 'state-closed-front');
             if (activeLeafIndex === leaves.length - 1) book.classList.replace('state-closed-back', 'state-open');
         }
@@ -217,7 +217,7 @@ function construirLibro() {
 
     document.querySelector('.scene').addEventListener('click', (e) => {
         if (e.target.closest('.epub-download-btn')) return;
-        
+
         if (e.clientX > window.innerWidth / 2) {
             goNext();
         } else {
